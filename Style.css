@@ -1,0 +1,36 @@
+.section, div {
+    margin: 0;
+    padding: 0;
+  }
+  
+
+.first-color { 
+	background: #005689; 
+}
+	
+.second-color { 
+	background: #007cb9; 
+}
+
+.third-color { 
+	background: #d5eeff; 
+}
+
+.card-footer { 
+	background-color: #ff895d;
+    color: white;
+    text-align: center;
+}
+
+.Mid {
+	background: #d5eeff; 
+    height: 100%;
+    width: 100%;
+    color: black;
+}
+
+.card-header {
+    background: #005689; 
+    text-align: center;
+
+}
