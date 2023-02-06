@@ -1,0 +1,39 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="form_container">
+    <div class="form_wrapper">
+        <form method="POST" action="" class="form">
+            <!-- {% for error in form.username_new.errors %}
+                <span style="color:red;">{{ error }}<br></span>
+            {% endfor %} -->
+            
+            {{ form.csrf_token }} 
+
+            <div class="input_wrapper">
+                {{ form.username_new.label }} <br> {{ form.username_new }}
+            </div> 
+
+            <div class="input_wrapper">
+                {{ form.email_address_new.label }} <br> {{ form.email_address_new }}
+            </div>
+            
+            <div class="input_wrapper">
+                {{ form.password_new.label }} <br> {{ form.password_new }} 
+            </div>
+            
+            <div class="input_wrapper">
+                {{ form.password_confirm.label }} <br> {{ form.password_confirm }}
+            </div>
+
+            <div class="input_wrapper">
+                {{ form.submit(class_="submit_button") }}
+            </div>
+   
+            {% for field, errors in form.errors.items() %}
+                {{ ', '.join(errors) }}
+            {% endfor %}
+
+        </form>
+    </div>
+</div>
+{% endblock content %}

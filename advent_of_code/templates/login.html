@@ -1,0 +1,31 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<div class="form_container">
+    <div class="form_wrapper">
+        <form method="POST" action="" class="form">
+            {{ form.csrf_token }} 
+
+            <div class="input_wrapper">
+                {{ form.username.label }} <br> {{ form.username }}
+            </div>
+            
+            <div class="input_wrapper">
+                {{ form.password.label }} <br> {{ form.password }}
+            </div>
+
+            <div class="input_wrapper">
+                {{ form.submit(class_="submit_button") }}
+            </div>
+        </form>
+        
+        <div class="login_error">
+            <ul class="flashes">
+                {% for field, errors in form.errors.items() %}
+                <li>{{ ', '.join(errors) }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}
