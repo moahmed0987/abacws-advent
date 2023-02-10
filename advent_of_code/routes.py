@@ -9,7 +9,7 @@ login_manager.login_view = "login"
 
 @app.route('/')
 def home():
-    return 'Home Page'
+    return render_template("index.html", title="Home")
     
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -37,6 +37,12 @@ def login():
         return redirect(url_for("home"))
 
     return render_template("login.html", title="Login", form=form)
+
+@app.route("/leaderboard")
+def leaderboard():
+    # get top 100 users ordered by score
+    users = User.query.order_by(User.score.desc()).limit(100).all()
+    return render_template("leaderboard.html", title="Leaderboard", users=users)
 
 @app.route("/logout")
 @login_required
