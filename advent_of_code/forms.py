@@ -19,7 +19,11 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email_address=email_address_new.data).first()
         if user is not None:
             raise ValidationError("Email address is taken. Please choose a different one.")
-        # Validation for Cardiff email address handled in JavaScript
+        if email_address_new.data.contains("@") == False:
+            raise ValidationError("Email address is invalid. Please try again.")
+        elif email_address_new.data.lower().contains("@cardiff.ac.uk") == False:
+            raise ValidationError("Email address is invalid. You must use a Cardiff University email address. Please try again.")
+
 
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
