@@ -1,3 +1,4 @@
+from datetime import timedelta
 from flask import redirect, render_template, request, session, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
@@ -28,7 +29,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        login_user(user)
+        login_user(user, remember=form.remember_me.data,duration=timedelta(days=7))
 
         if "redirect" in session:
             return redirect(session["redirect"])
