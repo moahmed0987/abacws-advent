@@ -1,7 +1,7 @@
 .leaderboard-container {
-    /* text-align: center; */
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .leaderboard-row {
@@ -10,6 +10,5 @@
     justify-content: space-between;
     align-items: center;
     margin: 0 0 1rem 0;
-    align-self: center;
-    /* width: ; */
+    width: 60%;
 }
