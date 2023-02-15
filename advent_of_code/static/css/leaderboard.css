@@ -1,0 +1,15 @@
+.leaderboard-container {
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboard-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 1rem 0;
+    align-self: center;
+    /* width: ; */
+}

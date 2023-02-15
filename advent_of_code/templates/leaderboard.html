@@ -1,8 +1,19 @@
 {% extends "base.html" %} 
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/leaderboard.css') }}">
+{% endblock head %}
 {% block content %}
-<div>
+<div class="leaderboard-container">
+    <div class="leaderboard-row">
+        <span class="leaderboard-username">Username</span>
+        <span class="leaderboard-score">Score</span>
+    </div>
     {% for user in users %}
-        <p>{{ user.username }} {{ user.score }}</p>
+        <div class="leaderboard-row">
+            <span class="leaderboard-username">{{ user.username }}</span>
+            <span class="leaderboard-score">{{ user.score }}</span>
+        </div>
     {% endfor %}
 </div>
 {% endblock content %}
