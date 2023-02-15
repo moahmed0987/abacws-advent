@@ -3,3 +3,4 @@ __pycache__
 .cache
 .pyc
 secret_keys.py
+advent_of_code.db
