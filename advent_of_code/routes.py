@@ -9,7 +9,7 @@ login_manager.login_view = "login"
 
 @app.route('/')
 def home():
-    return render_template("index.html", title="Home")
+    return render_template("index.html", title="Advent of Code")
     
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -29,7 +29,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        login_user(user, remember=form.remember_me.data,duration=timedelta(days=7))
+        login_user(user, remember=form.remember_me.data, duration=timedelta(days=7))
 
         if "redirect" in session:
             return redirect(session["redirect"])
