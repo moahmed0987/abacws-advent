@@ -27,7 +27,9 @@
             </div>
    
             {% for field, errors in form.errors.items() %}
-                {{ ', '.join(errors) }}
+                {% for error in errors %}
+                    {{ error }} <br>
+                {% endfor %}
             {% endfor %}
 
         </form>
