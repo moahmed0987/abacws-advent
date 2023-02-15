@@ -7,37 +7,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }} | Advent of Code</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/base_style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <script src="{{url_for('static', filename='script.js')}}" defer></script>
+    <script src="{{url_for('static', filename='js/nav-script.js')}}" defer></script>
+    {% block head %}
+    {% endblock %}
 
 </head>
 
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a id="home" href="{{ url_for('home') }}">Home</a></li>
+        <nav class="base-nav">
+            <ul class="nav-bar">
+                <li class="base-nav-item">
+                    <a id="home" href="{{ url_for('home') }}" class="nav-item-link">
+                        <img class="btn nav-item-link logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="logo">
+                    </a>
+                </li>
 
                 {% if current_user.is_authenticated %}
-                    <li><a id="logout" href="{{ url_for('logout') }}">Logout</a></li>
+                    <li class="base-nav-item">
+                        <a id="logout" href="{{ url_for('logout') }}" class="btn nav-item-link">Logout</a>
+                    </li>
                 {% else %}
-                    <li><a id="login" href="{{ url_for('login') }}">Login</a></li>
-                    <li><a id="register" href="{{ url_for('register') }}">Register</a></li>
+                    <li class="base-nav-item">
+                        <a id="login" href="{{ url_for('login') }}" class="btn nav-item-link">Login</a>
+                    </li>
+                    <li class="base-nav-item">
+                        <a id="register" href="{{ url_for('register') }}" class="btn nav-item-link">Register</a>
+                    </li>
                 {% endif %}
 
+                <li class="base-nav-item">
+                    <a id="leaderboard" href="{{ url_for('leaderboard') }}" class="btn nav-item-link">Leaderboard</a>
+                </li>
             </ul>
+            <li class="hamburger-icon">
+                <a href="javascript:void(0);" class="icon btn nav-item-link" onclick="nav_bar_responsive()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>
         </nav>
-
-        <div class="logo_wrapper">
-            <div class="logo">
-                <img class="logo_book" src="{{ url_for('static', filename='img/logo_images/logo.png') }}"> <!-- TODO: create logo -->
-                <div class="logo_text_wrapper">
-                    <p class="logo_text">Advent of Code</p>
-                </div>
-            </div>
-        </div>
 
         <div class="title">
             <h1>{{ title }}</h1>
@@ -49,6 +59,13 @@
         {% block content %} 
         {% endblock %}
     </div>
+
+    <footer> 
+        <hr>
+        <div class="footer">
+            <p>Group 27, CM2305 Cardiff University</p>
+        </div>
+    </footer>
 </body>
 
 </html>
