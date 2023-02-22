@@ -1,8 +1,10 @@
+import os
+
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+
 from secret_keys import SECRET_KEY
-import os
 
 # app
 app = Flask(__name__)
@@ -20,4 +22,5 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "ad
 # initialize database
 db = SQLAlchemy(app)
 
-from advent_of_code import routes 
+# import routes
+from advent_of_code import routes
