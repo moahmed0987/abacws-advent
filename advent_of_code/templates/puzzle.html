@@ -1,9 +1,23 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 
-{{ puzzle }}
 
+<div class="form_container">
+    <div class="form_wrapper">
+        <form method="POST" action="" class="form">
+            {{ form.csrf_token }}
+            
+            {{ puzzle.puzzle }}
+
+            <div class="input_wrapper">
+                {{ form.answer }}
+            </div>
+
+            <div class="input_wrapper">
+                {{ form.submit(class_="submit_button") }}
+            </div>
+        </form>
+</div>
 
 {% endblock content %}

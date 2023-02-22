@@ -1,11 +1,11 @@
 from datetime import date, datetime, timedelta
 
-from flask import redirect, render_template, request, session, url_for
+from flask import flash, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
 from advent_of_code import app, db, login_manager
-from advent_of_code.forms import LoginForm, RegistrationForm
-from advent_of_code.models import Puzzle, User
+from advent_of_code.forms import LoginForm, PuzzleForm, RegistrationForm
+from advent_of_code.models import Puzzle, User, Attempt
 
 login_manager.login_view = "login"
 
@@ -42,7 +42,8 @@ def login():
 
     return render_template("login.html", title="Login", form=form)
 
-@app.route("/puzzle/<puzzle_date>")
+@app.route("/puzzle/<puzzle_date>", methods=["GET", "POST"])
+@login_required
 def puzzle(puzzle_date):
     # if user is not logged in, redirect to login page
     if current_user.is_authenticated == False:
@@ -57,7 +58,6 @@ def puzzle(puzzle_date):
     # if puzzle_date is invalid, redirect to error page
     try:
         puzzle_date = datetime.fromisoformat(puzzle_date)
-        print("TITLE_DATE =",puzzle_date)
     except ValueError:
         return "404 - Invalid date", 404
         # TODO: add error handling page
@@ -70,7 +70,22 @@ def puzzle(puzzle_date):
     
     title_date = puzzle_date.strftime("%Y-%m-%d")
 
-    return render_template("puzzle.html", title=title_date, puzzle=puzzle)
+    # form for submitting answer
+    form = PuzzleForm()
+    if form.validate_on_submit():
+        # create attempt. if answer is correct, update user score. if not, update attempt count. 
+        if form.answer.data == puzzle.answer:
+            attempt = Attempt(user_id=current_user.id, puzzle_id=puzzle.id, attempt_data=form.answer.data, date=datetime.now(), correct=True)
+            current_user.score += 10
+            # TODO: show success message
+        else:
+            attempt = Attempt(user_id=current_user.id, puzzle_id=puzzle.id, attempt_data=form.answer.data, date=datetime.now(), correct=False)
+            # TODO: show failure message
+        db.session.add(attempt)
+        db.session.commit()
+        
+
+    return render_template("puzzle.html", title=title_date, form=form, puzzle=puzzle)
 
 @app.route("/leaderboard")
 def leaderboard():

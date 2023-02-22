@@ -41,3 +41,7 @@ class LoginForm(FlaskForm):
         if user is not None:
             if not user.verify_password(password.data):
                 raise ValidationError("Incorrect password. Please try again.")
+
+class PuzzleForm(FlaskForm):
+    answer = StringField("Answer", validators=[DataRequired()])
+    submit = SubmitField("Submit")
