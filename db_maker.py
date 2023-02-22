@@ -21,11 +21,11 @@ puzzles.append(Puzzle(puzzle="Puzzle4", date=date.today(), answer="Answer4"))
 puzzles.append(Puzzle(puzzle="Puzzle5", date=date.today(), answer="Answer5"))
 
 attempts = []
-attempts.append(Attempt(puzzle_id=1, user_id=1, attempt_data="Attempt1", date=datetime.now(), score=0))
-attempts.append(Attempt(puzzle_id=2, user_id=2, attempt_data="Attempt2", date=datetime.now(), score=10))
-attempts.append(Attempt(puzzle_id=3, user_id=3, attempt_data="Attempt3", date=datetime.now(), score=20))
-attempts.append(Attempt(puzzle_id=4, user_id=4, attempt_data="Attempt4", date=datetime.now(), score=30))
-attempts.append(Attempt(puzzle_id=5, user_id=5, attempt_data="Attempt5", date=datetime.now(), score=40))
+attempts.append(Attempt(puzzle_id=1, user_id=1, attempt_data="Attempt1", date=datetime.now(), correct=True))
+attempts.append(Attempt(puzzle_id=2, user_id=2, attempt_data="Attempt2", date=datetime.now(), correct=False))
+attempts.append(Attempt(puzzle_id=3, user_id=3, attempt_data="Attempt3", date=datetime.now(), correct=True))
+attempts.append(Attempt(puzzle_id=4, user_id=4, attempt_data="Attempt4", date=datetime.now(), correct=False))
+attempts.append(Attempt(puzzle_id=5, user_id=5, attempt_data="Attempt5", date=datetime.now(), correct=True))
 
 db.session.add_all(users)
 db.session.add_all(puzzles)

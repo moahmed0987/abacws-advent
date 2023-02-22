@@ -25,6 +25,10 @@
                     </a>
                 </li>
 
+                <li class="base-nav-item">
+                    <a id="about" href="{{ url_for('puzzle', puzzle_date='today') }}" class="btn nav-item-link">Today's Puzzle</a>
+                </li>
+
                 {% if current_user.is_authenticated %}
                     <li class="base-nav-item">
                         <a id="logout" href="{{ url_for('logout') }}" class="btn nav-item-link">Logout</a>

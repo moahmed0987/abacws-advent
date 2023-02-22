@@ -42,10 +42,10 @@ class Attempt(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     attempt_data = db.Column(db.String(1000), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
-    score = db.Column(db.Integer, nullable=False)
+    correct = db.Column(db.Boolean, nullable=False)
 
     def __repr__(self):
-        return f"Attempt(id:'{self.id}', puzzle_id:'{self.puzzle_id}', user_id:'{self.user_id}', attempt_data:'{self.attempt_data}', date:'{self.date}', score:'{self.score}')"
+        return f"Attempt(id:'{self.id}', puzzle_id:'{self.puzzle_id}', user_id:'{self.user_id}', attempt_data:'{self.attempt_data}', date:'{self.date}', correct:'{self.correct}')"
 
 @login_manager.user_loader
 def load_user(user_id):
