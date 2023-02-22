@@ -72,6 +72,12 @@ footer {
     padding: 10px;
 }
 
+.alert-message {
+    padding: 20px;
+    margin: 5px;
+    color: #970020;
+    background-color: #ffd5de;
+}
 
 @media screen and (max-width: 600px) {
     .nav-bar .base-nav-item:not(:first-child) {
