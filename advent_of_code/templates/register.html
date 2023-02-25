@@ -25,13 +25,6 @@
             <div class="input_wrapper">
                 {{ form.submit(class_="submit_button") }}
             </div>
-   
-            {% for field, errors in form.errors.items() %}
-                {% for error in errors %}
-                    {{ error }} <br>
-                {% endfor %}
-            {% endfor %}
-
         </form>
     </div>
 </div>

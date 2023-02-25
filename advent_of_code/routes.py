@@ -22,6 +22,10 @@ def register():
         db.session.commit()
         return redirect(url_for("home"))
 
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(error)
+
     return render_template("register.html", title="Register", form=form)
 
 @app.route("/login", methods=["GET", "POST"])
@@ -39,6 +43,10 @@ def login():
             return redirect(direction)
 
         return redirect(url_for("home"))
+
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(error)
 
     return render_template("login.html", title="Login", form=form)
 

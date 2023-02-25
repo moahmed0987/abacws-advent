@@ -21,12 +21,6 @@
                 {{ form.submit(class_="submit_button") }}
             </div>
         </form>
-        
-        {% for field, errors in form.errors.items() %}
-            {% for error in errors %}
-                {{ error }} <br>
-            {% endfor %}
-        {% endfor %}
     </div>
 </div>
 {% endblock content %}
