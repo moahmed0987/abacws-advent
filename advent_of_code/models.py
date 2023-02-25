@@ -43,6 +43,7 @@ class Attempt(db.Model):
     attempt_data = db.Column(db.String(1000), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     correct = db.Column(db.Boolean, nullable=False)
+    points_earned = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return f"Attempt(id:'{self.id}', puzzle_id:'{self.puzzle_id}', user_id:'{self.user_id}', attempt_data:'{self.attempt_data}', date:'{self.date}', correct:'{self.correct}')"

@@ -21,11 +21,13 @@ puzzles.append(Puzzle(puzzle="Puzzle4", date=date.today(), answer="Answer4"))
 puzzles.append(Puzzle(puzzle="Puzzle5", date=date.today(), answer="Answer5"))
 
 attempts = []
-attempts.append(Attempt(puzzle_id=1, user_id=1, attempt_data="Attempt1", date=datetime.now(), correct=True))
-attempts.append(Attempt(puzzle_id=2, user_id=2, attempt_data="Attempt2", date=datetime.now(), correct=False))
-attempts.append(Attempt(puzzle_id=3, user_id=3, attempt_data="Attempt3", date=datetime.now(), correct=True))
-attempts.append(Attempt(puzzle_id=4, user_id=4, attempt_data="Attempt4", date=datetime.now(), correct=False))
-attempts.append(Attempt(puzzle_id=5, user_id=5, attempt_data="Attempt5", date=datetime.now(), correct=True))
+attempts.append(Attempt(puzzle_id=1, user_id=1, attempt_data="Answer1", date=datetime.now(), correct=True, points_earned=10))
+attempts.append(Attempt(puzzle_id=2, user_id=2, attempt_data="WrongAnswer", date=datetime.now(), correct=False, points_earned=0))
+attempts.append(Attempt(puzzle_id=3, user_id=3, attempt_data="Answer3", date=datetime.now(), correct=True, points_earned=10))
+attempts.append(Attempt(puzzle_id=4, user_id=4, attempt_data="WrongAnswer", date=datetime.now(), correct=False, points_earned=0))
+attempts.append(Attempt(puzzle_id=5, user_id=5, attempt_data="WrongAnswer", date=datetime.now(), correct=False, points_earned=0))
+attempts.append(Attempt(puzzle_id=5, user_id=5, attempt_data="WrongAnswer", date=datetime.now(), correct=False, points_earned=0))
+attempts.append(Attempt(puzzle_id=5, user_id=5, attempt_data="CorrectAnswer", date=datetime.now(), correct=True, points_earned=8))
 
 db.session.add_all(users)
 db.session.add_all(puzzles)
