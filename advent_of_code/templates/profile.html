@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/profile-style.css') }}">
+{% endblock head %}
+
+{% block content %}
+
+    {% if current_user.username == user.username %}
+        <div class="leaderboard">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Puzzle</th>
+                            <th>Correct</th>
+                            <th>Points Earned</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for attempt in user.attempts %}
+                            <tr>
+                                <td class="puzzle"><a href="{{ url_for('puzzle', puzzle_date=(attempt.puzzle.date | string())[:10]) }}">Puzzle {{ (attempt.puzzle.date | string())[:10] }}</a></td>
+                                <td class="correct">{{ attempt.correct }}</td>
+                                <td class="points_earned">{{ attempt.points_earned }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    {% else %}
+        {{ user.score}}
+    {% endif %}
+
+{% endblock content %}

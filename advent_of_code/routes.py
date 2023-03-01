@@ -106,6 +106,16 @@ def leaderboard():
     users = User.query.order_by(User.score.desc()).limit(100).all()
     return render_template("leaderboard.html", title="Leaderboard", users=users)
 
+@app.route("/profile/<username>")
+def profile(username):
+    # get user
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return "404 - User not found", 404
+        # TODO: add error handling page
+    
+    return render_template("profile.html", title=user.username, user=user)
+
 @app.route("/logout")
 @login_required
 def logout():
