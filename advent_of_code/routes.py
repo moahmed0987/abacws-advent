@@ -24,7 +24,7 @@ def register():
 
     for field, errors in form.errors.items():
         for error in errors:
-            flash(error)
+            flash(error, "error")
 
     return render_template("register.html", title="Register", form=form)
 
@@ -35,7 +35,11 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        login_user(user, remember=form.remember_me.data, duration=timedelta(days=7))
+        success = login_user(user, remember=form.remember_me.data, duration=timedelta(days=7))
+        if success:
+            flash("Login successful.", "success")
+        else:
+            flash("Login failed. Please try again.", "error")
 
         if "redirect" in session:
             direction = session["redirect"]
@@ -46,7 +50,7 @@ def login():
 
     for field, errors in form.errors.items():
         for error in errors:
-            flash(error)
+            flash(error, "error")
 
     return render_template("login.html", title="Login", form=form)
 
@@ -83,12 +87,13 @@ def puzzle(puzzle_date):
     if form.validate_on_submit():
         # create attempt. if answer is correct, update user score. if not, update attempt count. 
         if form.answer.data == puzzle.answer:
-            attempt = Attempt(user_id=current_user.id, puzzle_id=puzzle.id, attempt_data=form.answer.data, date=datetime.now(), correct=True)
-            current_user.score += 10
-            # TODO: show success message
+            points_earned = 10 - current_user.attempts.filter_by(puzzle_id=puzzle.id).count()
+            attempt = Attempt(puzzle_id=puzzle.id, user_id=current_user.id, attempt_data=form.answer.data, date=datetime.now(), correct=True, points_earned=points_earned)
+            current_user.score += points_earned
+            flash(f"Correct! You earned {points_earned} points.", "success")
         else:
-            attempt = Attempt(user_id=current_user.id, puzzle_id=puzzle.id, attempt_data=form.answer.data, date=datetime.now(), correct=False)
-            # TODO: show failure message
+            attempt = Attempt(user_id=current_user.id, puzzle_id=puzzle.id, attempt_data=form.answer.data, date=datetime.now(), correct=False, points_earned=0)
+            flash("Incorrect. Try again!", "error")
         db.session.add(attempt)
         db.session.commit()
         
