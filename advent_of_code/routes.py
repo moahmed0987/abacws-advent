@@ -57,11 +57,11 @@ def login():
     return render_template("login.html", title="Login", form=form)
 
 @app.route("/puzzle/<puzzle_date>", methods=["GET", "POST"])
-@login_required
 def puzzle(puzzle_date):
     # if user is not logged in, redirect to login page
     if current_user.is_authenticated == False:
         session["redirect"] = url_for("puzzle", puzzle_date=puzzle_date)
+        flash("You must be logged in to view this page.", "error")
         return redirect(url_for("login"))
 
     # if puzzle_date is "today", redirect to today's puzzle
