@@ -15,6 +15,8 @@ def home():
     
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))    
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username_new.data, email_address=form.email_address_new.data, password=form.password_new.data)
@@ -87,7 +89,7 @@ def puzzle(puzzle_date):
     if form.validate_on_submit():
         # create attempt. if answer is correct, update user score. if not, update attempt count. 
         if form.answer.data == puzzle.answer:
-            points_earned = 10 - current_user.attempts.filter_by(puzzle_id=puzzle.id).count()
+            points_earned = 10 - current_user.attempts
             attempt = Attempt(puzzle_id=puzzle.id, user_id=current_user.id, attempt_data=form.answer.data, date=datetime.now(), correct=True, points_earned=points_earned)
             current_user.score += points_earned
             flash(f"Correct! You earned {points_earned} points.", "success")
