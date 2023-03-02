@@ -1,6 +1,6 @@
 from datetime import date, datetime, timedelta
 
-from flask import flash, redirect, render_template, request, session, url_for
+from flask import abort, flash, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
 from advent_of_code import app, db, login_manager
@@ -73,14 +73,14 @@ def puzzle(puzzle_date):
     try:
         puzzle_date = datetime.fromisoformat(puzzle_date)
     except ValueError:
-        return "404 - Invalid date", 404
-        # TODO: add error handling page
+        # return "404 - Invalid date", 404
+        abort(404)
 
     # get puzzle for puzzle_date
     puzzle = Puzzle.query.filter_by(date=puzzle_date).first()
     if puzzle is None:
-        return "404 - Puzzle not found", 404
-        # TODO: add error handling page
+        # return "404 - Puzzle not found", 404
+        abort(404)
     
     title_date = puzzle_date.strftime("%Y-%m-%d")
 
@@ -113,8 +113,8 @@ def profile(username):
     # get user
     user = User.query.filter_by(username=username).first()
     if user is None:
-        return "404 - User not found", 404
-        # TODO: add error handling page
+        # return "404 - User not found", 404
+        abort(404)
     
     return render_template("profile.html", title=user.username, user=user)
 
@@ -123,3 +123,7 @@ def profile(username):
 def logout():
     logout_user()
     return redirect(url_for("home"))
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html", title="404"), 404
