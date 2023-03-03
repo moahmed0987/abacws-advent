@@ -87,6 +87,12 @@ def puzzle(puzzle_date):
     # form for submitting answer
     form = PuzzleForm()
     if form.validate_on_submit():
+        if Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id, correct=True).count() > 0:
+            flash("You have already solved this puzzle. You cannot attempt it again.", "error")
+            return redirect(url_for("puzzle", puzzle_date=puzzle_date))
+        if Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id).count() >= 5:
+            flash("You have already attempted this puzzle 5 times. You cannot attempt it again.", "error")
+            return redirect(url_for("puzzle", puzzle_date=puzzle_date))
         # create attempt. if answer is correct, update user score. if not, update attempt count. 
         if form.answer.data == puzzle.answer:
             points_earned = 10 - Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id).count()
