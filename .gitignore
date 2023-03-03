@@ -4,3 +4,4 @@ __pycache__
 .pyc
 secret_keys.py
 advent_of_code.db
+sqlite3.exe
