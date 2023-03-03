@@ -74,14 +74,14 @@ def puzzle(puzzle_date):
         puzzle_date = datetime.fromisoformat(puzzle_date)
     except ValueError:
         # return "404 - Invalid date", 404
-        abort(404)
+        return render_template("puzzle_not_found.html", title="Puzzle Not Found")
 
     # get puzzle for puzzle_date
     puzzle = Puzzle.query.filter_by(date=puzzle_date).first()
     if puzzle is None:
         # return "404 - Puzzle not found", 404
-        abort(404)
-    
+        return render_template("puzzle_not_found.html", title="Puzzle Not Found")
+
     title_date = puzzle_date.strftime("%Y-%m-%d")
 
     # form for submitting answer
