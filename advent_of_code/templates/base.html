@@ -33,6 +33,9 @@
                     <li class="base-nav-item">
                         <a id="logout" href="{{ url_for('logout') }}" class="btn nav-item-link">Logout</a>
                     </li>
+                    <li class="base-nav-item profile-button">
+                        <a id="Profile" href="{{ url_for('profile', username=current_user.username) }}" class="btn nav-item-link">Profile</a>
+                    </li>
                 {% else %}
                     <li class="base-nav-item">
                         <a id="login" href="{{ url_for('login') }}" class="btn nav-item-link">Login</a>

@@ -118,11 +118,12 @@ def leaderboard():
 def profile(username):
     # get user
     user = User.query.filter_by(username=username).first()
+    username=current_user.username
     if user is None:
         # return "404 - User not found", 404
         abort(404)
     
-    return render_template("profile.html", title=user.username, user=user)
+    return render_template("profile.html", username=username, user=user)
 
 @app.route("/logout")
 @login_required
