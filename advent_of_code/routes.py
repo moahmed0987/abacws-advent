@@ -81,10 +81,6 @@ def puzzle(puzzle_date):
     if puzzle is None:
         # return "404 - Puzzle not found", 404
         return render_template("puzzle_not_found.html", title="Puzzle Not Found")
-    
-    form = PuzzleForm()
-    if puzzle.id == 1:
-        return render_template("q1.html", title="Puzzle 1", form=form)
 
     title_date = puzzle_date.strftime("%Y-%m-%d")
 
@@ -98,7 +94,7 @@ def puzzle(puzzle_date):
             flash("You have already attempted this puzzle 5 times. You cannot attempt it again.", "error")
             return redirect(url_for("puzzle", puzzle_date=puzzle_date))
         # create attempt. if answer is correct, update user score. if not, update attempt count. 
-        if form.answer.data == puzzle.answer:
+        if form.answer.data.lower() == puzzle.answer.lower():
             points_earned = 10 - Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id).count()
             attempt = Attempt(puzzle_id=puzzle.id, user_id=current_user.id, attempt_data=form.answer.data, date=datetime.now(), correct=True, points_earned=points_earned)
             current_user.score += points_earned
@@ -110,6 +106,9 @@ def puzzle(puzzle_date):
         db.session.commit()
         
 
+    if puzzle.id == 1:
+        return render_template("q1.html", title="Puzzle 1", form=form, puzzle=puzzle)
+    
     return render_template("puzzle.html", title=title_date, form=form, puzzle=puzzle)
 
 @app.route("/leaderboard")

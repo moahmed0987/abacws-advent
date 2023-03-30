@@ -1,7 +1,3 @@
-/* .table-container {
-    width: 100%;
-    text-align: center;
-} */
 table { 
     border-collapse: collapse;
     border: 1px solid black;
@@ -13,4 +9,15 @@ td, th {
     width: 3rem;
     height: 3rem;
     padding: 0.5rem;
+    text-align: center;
+}
+
+.puzzle-question {
+    font-size: 1.5rem;
+}
+
+.puzzle-question p {
+    text-align: center;
+    margin: 1rem auto;
+    width: 75%;
 }

@@ -3,6 +3,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/q1.css') }}">
 {% endblock %}
 {% block puzzlecontent %}
+
+    <div class="puzzle-question">
+       <p>{{ puzzle.puzzle }}</p>
+    </div>
     <table>
         <tr>
             <th></th>
