@@ -81,6 +81,10 @@ def puzzle(puzzle_date):
     if puzzle is None:
         # return "404 - Puzzle not found", 404
         return render_template("puzzle_not_found.html", title="Puzzle Not Found")
+    
+    form = PuzzleForm()
+    if puzzle.id == 1:
+        return render_template("q1.html", title="Puzzle 1", form=form)
 
     title_date = puzzle_date.strftime("%Y-%m-%d")
 

@@ -1,0 +1,58 @@
+{% extends "puzzle.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/q1.css') }}">
+{% endblock %}
+{% block puzzlecontent %}
+    <table>
+        <tr>
+            <th></th>
+            <th id="c0">1</th>
+            <th id="c1">2</th>
+            <th id="c2">3</th>
+            <th id="c3">4</th>
+            <th id="c4">5</th>
+        </tr>
+        <tr>
+            <th id="r0">1</th>
+
+            <td id="1">A</td>
+            <td id="2">B</td>
+            <td id="3">C</td>
+            <td id="4">D</td>
+            <td id="5">E</td>
+        </tr>
+        <tr>
+            <th id="r1">2</th>
+            <td id="6">F</td>
+            <td id="7">G</td>
+            <td id="8">H</td>
+            <td id="9">I</td>
+            <td id="10">J</td>
+        </tr>
+        <tr>
+            <th id="r2">3</th>
+            <td id="11">L</td>
+            <td id="12">M</td>
+            <td id="13">N</td>
+            <td id="14">O</td>
+            <td id="15">P</td>
+        </tr>
+        <tr>
+            <th id="r3">4</th> 
+            <td id="16">Q</td>
+            <td id="17">R</td>
+            <td id="18">S</td>
+            <td id="19">T</td>
+            <td id="20">U</td>
+        </tr>
+        <tr>
+            <th id="r4">5</th>
+            <td id="21">V</td>
+            <td id="22">W</td>
+            <td id="23">X</td>
+            <td id="24">Y</td>
+            <td id="25">Z</td>
+        </tr>
+    </table>
+    
+{% endblock puzzlecontent %}
