@@ -31,6 +31,8 @@ class Puzzle(db.Model):
     puzzle = db.Column(db.String(1000), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     answer = db.Column(db.String(1000), nullable=False)
+    hint = db.Column(db.String(1000))
+    image = db.Column(db.String(1000))
     attempts = db.relationship("Attempt", backref="puzzle")
 
     def __repr__(self):

@@ -1,15 +1,51 @@
 {% extends "base.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/puzzle-style.css') }}">
+{% endblock %}
 {% block content %}
 
 
 {% block puzzlecontent %}
-
-{% endblock puzzlecontent %}
+<div class="puzzle-question">
+    {% set puzzle_text = puzzle.puzzle.split('\n') %}
+    {% for line in puzzle_text %}
+        <p>{{ line }}</p>
+    {% endfor %}
+ </div>
+ {% endblock puzzlecontent %}
 
 <div class="form_container">
     <div class="form_wrapper">
         <form method="POST" action="" class="form">
             {{ form.csrf_token }}
+
+            {% if puzzle.image %}
+                <img src="{{ url_for('static', filename='img/' + puzzle.image) }}" alt="puzzle image">
+            {% endif %}
+
+            {% if puzzle.hint %}
+                <div class="input_wrapper">
+                    <button type="button" id="hint_button">Hint</button>
+                    {% if puzzle.hint.startswith('http') %}
+                        <script>
+                            hint_button.onclick = function () {
+                                var hint = document.getElementById("hint");
+                                hint.innerHTML = "<a href={{ puzzle.hint }}>{{ puzzle.hint }}</a>";
+                                
+                            }
+                        </script>
+                    {% else %}
+                        <script>
+                            hint_button.onclick = function () {
+                                var hint = document.getElementById("hint");
+                                hint.innerHTML = "{{ puzzle.hint }}";
+                                
+                            }    
+                        </script>
+                    {% endif %}
+                </div>
+                <p id="hint"></p>
+            {% endif %}
 
             <div class="input_wrapper">
                 {{ form.answer }}
@@ -19,6 +55,7 @@
                 {{ form.submit(class_="submit_button") }}
             </div>
         </form>
+    </div>
 </div>
-
+    
 {% endblock content %}

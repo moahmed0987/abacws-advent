@@ -1,0 +1,9 @@
+.puzzle-question {
+    font-size: 1.5rem;
+}
+
+.puzzle-question p {
+    text-align: center;
+    margin: 1rem auto;
+    width: 75%;
+}

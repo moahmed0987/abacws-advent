@@ -109,7 +109,7 @@ def puzzle(puzzle_date):
     if puzzle.id == 1:
         return render_template("q1.html", title="Puzzle 1", form=form, puzzle=puzzle)
     
-    return render_template("puzzle.html", title=title_date, form=form, puzzle=puzzle)
+    return render_template("puzzle.html", title=f"Puzzle {puzzle.id}", form=form, puzzle=puzzle)
 
 @app.route("/leaderboard")
 def leaderboard():
