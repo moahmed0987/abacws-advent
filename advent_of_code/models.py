@@ -29,6 +29,7 @@ class User(db.Model, UserMixin):
 class Puzzle(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     puzzle = db.Column(db.String(1000), nullable=False)
+    type = db.Column(db.String(1000), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     answer = db.Column(db.String(1000), nullable=False)
     hint = db.Column(db.String(1000))
