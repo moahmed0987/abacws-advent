@@ -39,6 +39,9 @@ puzzles.append(Puzzle(puzzle=
 puzzles.append(Puzzle(puzzle=
                       "Write a function that takes a list of integers and returns a new list that contains only the unique elements of the original list, in the same order.",
                               type="coding", date=date.today() + timedelta(days=7), answer="answer"))
+puzzles.append(Puzzle(puzzle=
+                      """Write a function that takes a list of strings and returns a list of True and False values indicating whether each string is a palindrome (i.e. reads the same forward and backward) \nThe function should ignore spaces, punctuation, and capitalisation. \nFor example, if the input is ["A man, a plan, a canal: Panama", "Not a palindrome."], the function should return [True, False].""",
+                              type="coding", date=date.today() + timedelta(days=8), answer="answer"))
 
 
 attempts = []
