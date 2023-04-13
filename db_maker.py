@@ -15,27 +15,30 @@ users.append(User(username='User5withaverylongname', email_address="user5withave
 puzzles = []
 puzzles.append(Puzzle(puzzle=
                       """Using the numbers on the grid, find the encrypted word by moving along the y-axis and down the x-axis. Determine the encrypted word for the following code: 3.4 5.3 4.5 2.5 1.1 2.4 5.1.""", 
-                            date=date.today(), answer="spyware", hint="""The code 2.1 corresponds to moving along the second row and down to the first column, which results in the letter "b"."""))
+                            type="logic", date=date.today(), answer="spyware", hint="""The code 2.1 corresponds to moving along the second row and down to the first column, which results in the letter "b"."""))
 puzzles.append(Puzzle(puzzle=
                       "A hacker is using a messaging system that looks familiar... can you decrypt their message?\n01101000 01100001 01100011 01101011 01100101 01110010 01110011",
-                            date=date.today() + timedelta(days=1), answer="hackers", hint="https://en.wikipedia.org/wiki/ASCII#Printable_characters"))
+                            type="logic", date=date.today() + timedelta(days=1), answer="hackers", hint="https://en.wikipedia.org/wiki/ASCII#Printable_characters"))
 puzzles.append(Puzzle(puzzle=
                       """Your password has been encrypted via Caesar cipher; you need to figure out the encrypted password to get past this stage. Your password is \"phishing\", find the encrypted word to solve this puzzle.""", 
-                            date=date.today() + timedelta(days=2), answer="tlmwlmrg", hint="""The outer ring of your Caesar Wheel represents the letters that make up your ACTUAL message ("plain text").  The inner ring of your Caesar Wheel shows you the letter you need to write in your CODED message ("cipher text").""",
+                            type="logic", date=date.today() + timedelta(days=2), answer="tlmwlmrk", hint="""The outer ring of your Caesar Wheel represents the letters that make up your ACTUAL message ("plain text").  The inner ring of your Caesar Wheel shows you the letter you need to write in your CODED message ("cipher text").""",
                             image="q3.png"))
 puzzles.append(Puzzle(puzzle=
                       "You are trying to access your computer, but your password has been locked. The following hint has been given to work out your password. \n1, VPN. \n2, firewall. \n4, encryption. \n2, authentication. \n1, spyware.",
-                            date=date.today() + timedelta(days=3), answer="virus", hint="The number corresponds to the placement of the letter in the password."))
+                            type="logic", date=date.today() + timedelta(days=3), answer="virus", hint="The number corresponds to the placement of the letter in the password."))
 puzzles.append(Puzzle(puzzle=
                       """You hear a strange beeping and note down the sequence, can you decrypt the message?\n
                       - .-. --- .--- .- -. """,
-                            date=date.today() + timedelta(days=4), answer="trojan", hint="https://en.wikipedia.org/wiki/Morse_code"))
+                            type="logic", date=date.today() + timedelta(days=4), answer="trojan", hint="https://en.wikipedia.org/wiki/Morse_code"))
 puzzles.append(Puzzle(puzzle=
                       "A hacker is using some sort of hieroglyphics to encrypt a message... can you decrypt the message?",
-                            date=date.today() + timedelta(days=5), answer="security", hint="https://en.wikipedia.org/wiki/Pigpen_cipher", image="q6.png"))
+                            type="logic", date=date.today() + timedelta(days=5), answer="security", hint="https://en.wikipedia.org/wiki/Pigpen_cipher", image="q6.png"))
 puzzles.append(Puzzle(puzzle=
                       "The hacker has improved their encryption method, this time its much harder to crack. However, you recognise they appear to be using the affine cipher. Can you decrypt this final message?\nsaxc spisgcp",
-                            date=date.today() + timedelta(days=6), answer="code cracker", hint="https://en.wikipedia.org/wiki/Affine_cipher", image="q7.png"))
+                            type="logic", date=date.today() + timedelta(days=6), answer="code cracker", hint="https://en.wikipedia.org/wiki/Affine_cipher"))
+puzzles.append(Puzzle(puzzle=
+                      "Write a function that takes a list of integers and returns a new list that contains only the unique elements of the original list, in the same order.",
+                              type="coding", date=date.today() + timedelta(days=7), answer="answer"))
 
 
 attempts = []
