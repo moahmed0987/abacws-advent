@@ -3,9 +3,8 @@ def answer(s):
     # s = s[1:-1]
     # s = s.split(",")
 
-    import ast
-    s = ast.literal_eval(s)
-    print(s)
+    from ast import literal_eval
+    s = literal_eval(s)
 
     lst = []
     for string in s:
