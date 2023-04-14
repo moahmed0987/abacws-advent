@@ -111,7 +111,6 @@ def puzzle(puzzle_date):
         
         return render_template("puzzle.html", title=f"Puzzle {puzzle.id}", form=form, puzzle=puzzle)
     elif puzzle.type == "coding":
-        # return str(exec(f"from advent_of_code.static.coding_lib import q{puzzle.id}\nprint(q{puzzle.id}.create_input())"))
         exec(f"""from advent_of_code.static.coding_lib import q{puzzle.id}; global puzzle_input; puzzle_input = str(q{puzzle.id}.create_input()); global puzzle_answer; puzzle_answer = str(q{puzzle.id}.answer(puzzle_input))""")
         
         # form for submitting code
