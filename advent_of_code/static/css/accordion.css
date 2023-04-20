@@ -15,9 +15,9 @@ label {
     transition: ease .5s;
 }
 
-label:hover {
+/* label:hover { */
     /* background: #4E8774; */
-}
+/* } */
 
 .content {
     width: 30%;
