@@ -1,43 +1,51 @@
-def evaluate_expression(expression):
-    operands = []
-    operators = []
-    i = 0
-    while i < len(expression):
-        if expression[i].isdigit():
-            operand = int(expression[i])
-            while i + 1 < len(expression) and expression[i+1].isdigit():
-                operand = operand * 10 + int(expression[i+1])
-                i += 1
-            operands.append(operand)
-        elif expression[i] in "+*":
-            operators.append(expression[i])
-        elif expression[i] == "(":
-            j = i + 1
-            count = 1
-            while count > 0:
-                if expression[j] == "(":
-                    count += 1
-                elif expression[j] == ")":
-                    count -= 1
-                j += 1
-            operands.append(evaluate_expression(expression[i+1:j-1]))
-            i = j - 1
-        i += 1
-    while operators:
-        operator = operators.pop(0)
-        if operator == "+":
-            operands[1] += operands[0]
-        elif operator == "*":
-            operands[1] *= operands[0]
-        operands.pop(0)
-    return operands[0] 
+Operators = set(['+', '-', '*', '/', '(', ')'])  # collection of Operators
+Priority = {'+':1, '-':1, '*':2, '/':2} # dictionary having priorities of Operators
 
-def answer(expressions): 
-    expressions = str(expressions)
-    from ast import literal_eval
-    expressions = literal_eval(expressions)
+def infixToPostfix(expression): 
+    stack = [] # initialization of empty stack
+    output = ''   
+    for character in expression:
+        if character.isdigit():  # if an operand append in postfix expression
+            output+= character
+        elif character=='(':  # else Operators push onto stack
+            stack.append('(')
+        elif character==')':
+            while stack and stack[-1]!= '(':
+                output+=stack.pop()
+            stack.pop()
+        elif character in Operators:
+            while stack and stack[-1]!='(' and Priority[character]<=Priority[stack[-1]]:
+                output+=stack.pop()
+            stack.append(character)
+    while stack:
+        output+=stack.pop()
+    return output
 
-    return sum([evaluate_expression(expression.split()) for expression in expressions]) 
+def do_math(operator, operand1, operand2):
+    match operator:
+        case "+":
+            return operand1 + operand2
+        case "-":
+            return operand1 - operand2
+        case "*":
+            return operand1 * operand2
+        case "/":
+            return operand1 / operand2
+
+def answer(expressions):
+    answers = []
+    for expression in expressions:
+        operand_stack = []
+        for character in expression:
+            if character.isdigit():
+                operand_stack.append(int(character))
+            elif character in Operators:
+                operand2 = operand_stack.pop()
+                operand1 = operand_stack.pop()
+                result = do_math(character, operand1, operand2)
+                operand_stack.append(result)
+        answers.append(operand_stack.pop())
+    return sum(answers)
 
 import random
 
@@ -48,19 +56,19 @@ def create_input():
         for _ in range(random.randint(3, 5)):
             expression += str(random.randint(1, 9))
             expression += " "
-            expression += random.choice(["+", "*"])
+            expression += random.choice(["+", "*", "-", "/"])
             expression += " "
             if random.random() < 0.3:
                 expression += str(random.randint(1, 9))
                 expression += " "
-                expression += random.choice(["+", "*"])
+                expression += random.choice(["+", "*", "-", "/"])
                 expression += " "                
             else:
                 expression += "( "
                 expression += generate_expression()
                 expression += " )"
                 expression += " "
-                expression += random.choice(["+", "*"])
+                expression += random.choice(["+", "*", "-", "/"])
                 expression += " "
             expression += str(random.randint(1, 9))
         expression_list.append(expression)
@@ -70,7 +78,7 @@ def generate_expression():
     expression = ""
     expression += str(random.randint(1, 9))
     expression += " "
-    expression += random.choice(["+", "*"])
+    expression += random.choice(["+", "*", "-", "/"])
     expression += " "
     expression += str(random.randint(1, 9))
     return expression
