@@ -2,6 +2,7 @@ from datetime import date, datetime, timedelta
 
 from flask import abort, flash, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_required, login_user, logout_user
+from itsdangerous import URLSafeSerializer
 
 from advent_of_code import app, db, login_manager
 from advent_of_code.forms import LoginForm, PuzzleForm, RegistrationForm
@@ -56,8 +57,9 @@ def login():
 
     return render_template("login.html", title="Login", form=form)
 
+@app.route("/puzzle/<puzzle_date>/<encoded_input>", methods=["GET", "POST"])
 @app.route("/puzzle/<puzzle_date>", methods=["GET", "POST"])
-def puzzle(puzzle_date):
+def puzzle(puzzle_date, encoded_input=None):
     # if user is not logged in, redirect to login page
     if current_user.is_authenticated == False:
         session["redirect"] = url_for("puzzle", puzzle_date=puzzle_date)
@@ -111,29 +113,35 @@ def puzzle(puzzle_date):
         
         return render_template("puzzle.html", title=f"Puzzle {puzzle.id}", form=form, puzzle=puzzle)
     elif puzzle.type == "coding":
-        exec(f"""from advent_of_code.static.coding_lib import q{puzzle.id}; global puzzle_input; puzzle_input = str(q{puzzle.id}.create_input()); global puzzle_answer; puzzle_answer = str(q{puzzle.id}.answer(puzzle_input))""")
-        
-        # form for submitting code
-        form = PuzzleForm()
-        if form.validate_on_submit():
-            if Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id, correct=True).count() > 0:
-                flash("You have already solved this puzzle. You cannot attempt it again.", "error")
-                return redirect(url_for("puzzle", puzzle_date=puzzle_date))
-            if Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id).count() >= 5:
-                flash("You have already attempted this puzzle 5 times. You cannot attempt it again.", "error")
-                return redirect(url_for("puzzle", puzzle_date=puzzle_date))
-            # create attempt. if answer is correct, update user score. if not, update attempt count.
-            if form.answer.data.lower() == puzzle_answer:
-                points_earned = 10 - Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id).count()
-                attempt = Attempt(puzzle_id=puzzle.id, user_id=current_user.id, attempt_data=form.answer.data, date=datetime.now(), correct=True, points_earned=points_earned)
-                current_user.score += points_earned
-                flash(f"Correct! You earned {points_earned} points.", "success")
-            else:
-                attempt = Attempt(user_id=current_user.id, puzzle_id=puzzle.id, attempt_data=form.answer.data, date=datetime.now(), correct=False, points_earned=0)
-                flash("Incorrect. Try again!", "error")
-            db.session.add(attempt)
-            db.session.commit()
-        return render_template("coding_puzzle.html", title=f"Puzzle {puzzle.id}", form=form, puzzle=puzzle, puzzle_input=puzzle_input)
+        if encoded_input is None:
+            exec(f"from advent_of_code.static.coding_lib import q{puzzle.id}; global exec_puzzle_input; exec_puzzle_input = str(q{puzzle.id}.create_input());")
+            puzzle_input_serialized = URLSafeSerializer("sec").dumps(exec_puzzle_input)
+            return redirect(url_for("puzzle", puzzle_date=puzzle_date, encoded_input=puzzle_input_serialized))
+        else:
+            puzzle_input = URLSafeSerializer("sec").loads(encoded_input)
+            exec(f"from advent_of_code.static.coding_lib import q{puzzle.id}; global exec_puzzle_answer; exec_puzzle_answer = str(q{puzzle.id}.answer(puzzle_input))")
+            print("exec_puzzle_answer =", exec_puzzle_answer)
+            # form for submitting code
+            form = PuzzleForm()
+            if form.validate_on_submit():
+                if Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id, correct=True).count() > 0:
+                    flash("You have already solved this puzzle. You cannot attempt it again.", "error")
+                    return redirect(url_for("puzzle", puzzle_date=puzzle_date))
+                if Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id).count() >= 5:
+                    flash("You have already attempted this puzzle 5 times. You cannot attempt it again.", "error")
+                    return redirect(url_for("puzzle", puzzle_date=puzzle_date))
+                # create attempt. if answer is correct, update user score. if not, update attempt count.
+                if form.answer.data.lower() == exec_puzzle_answer.lower():
+                    points_earned = 10 - Attempt.query.filter_by(user_id=current_user.id, puzzle_id=puzzle.id).count()
+                    attempt = Attempt(puzzle_id=puzzle.id, user_id=current_user.id, attempt_data=form.answer.data, date=datetime.now(), correct=True, points_earned=points_earned)
+                    current_user.score += points_earned
+                    flash(f"Correct! You earned {points_earned} points.", "success")
+                else:
+                    attempt = Attempt(user_id=current_user.id, puzzle_id=puzzle.id, attempt_data=form.answer.data, date=datetime.now(), correct=False, points_earned=0)
+                    flash("Incorrect. Try again!", "error")
+                db.session.add(attempt)
+                db.session.commit()
+            return render_template("coding_puzzle.html", title=f"Puzzle {puzzle.id}", form=form, puzzle=puzzle, puzzle_input=puzzle_input)
 
 @app.route("/leaderboard")
 def leaderboard():
