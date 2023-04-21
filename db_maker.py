@@ -46,7 +46,7 @@ puzzles.append(Puzzle(puzzle=
                       """Given a list of passwords and their corresponding policies, determine how many passwords are valid according to their policy. \nThe policies contains a required letter and a range of allowable repetitions for that letter. The passwords are in the form: "<min reps>-<max reps> <required letter>:<password>\"""",
                               type="coding", date=date.today() + timedelta(days=9), answer="answer"))
 puzzles.append(Puzzle(puzzle=
-                      """Evaluate arithmetic expressions with +, *, and parentheses according to the rules of operator precedence, where + and * have the same precedence. \nInput: a list of arithmetic expressions, where each expression is a string containing digits, parentheses, +, and *, separated by spaces. \nOutput: the sum of the results of evaluating each expression. """,
+                      """Write a Python program that evaluates arithmetic expressions with +, -, /, *, and parentheses according to the rules of operator precedence, where / and * have the same precedence and + and - have the same precedence. \nInput: a list of arithmetic expressions. \nOutput: the sum of the results of evaluating each expression rounding to 2 decimal places. \nFor example, if the input is ['3 * ( 2 + 6 ) / 52 - 9 - 64 / 7 / 9'], the output should be 23.00.""",
                               type="coding", date=date.today() + timedelta(days=10), answer="answer"))
 
 
