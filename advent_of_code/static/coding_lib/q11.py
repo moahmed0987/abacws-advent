@@ -33,6 +33,12 @@ def do_math(operator, operand1, operand2):
             return operand1 / operand2
 
 def answer(expressions):
+    from ast import literal_eval
+    expressions = literal_eval(expressions)
+
+    for i in range(len(expressions)):
+        expressions[i] = infixToPostfix(expressions[i])
+
     answers = []
     for expression in expressions:
         operand_stack = []
@@ -45,7 +51,7 @@ def answer(expressions):
                 result = do_math(character, operand1, operand2)
                 operand_stack.append(result)
         answers.append(operand_stack.pop())
-    return sum(answers)
+    return round(sum(answers), 2)
 
 import random
 
