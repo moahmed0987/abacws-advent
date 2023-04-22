@@ -3,6 +3,7 @@ from datetime import date, datetime, timedelta
 from flask import abort, flash, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 from itsdangerous import BadSignature, URLSafeSerializer
+from sqlalchemy import func
 
 from advent_of_code import app, db, login_manager
 from advent_of_code.forms import LoginForm, PuzzleForm, RegistrationForm
@@ -38,7 +39,7 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter(func.lower(User.username) == func.lower(form.username.data)).first()
         success = login_user(user, remember=form.remember_me.data, duration=timedelta(days=7))
         if success:
             flash("Login successful.", "success")

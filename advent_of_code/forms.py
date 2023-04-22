@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, ValidationError, EqualTo, Length
 from advent_of_code.models import User
+from sqlalchemy import func
 
 class RegistrationForm(FlaskForm):
     username_new = StringField("Username", validators=[DataRequired(), Length(5, 20, message="Username must be between 5 and 20 characters long. Try again.")])
@@ -11,12 +12,12 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField("Register")
 
     def validate_username_new(self, username_new):
-        user = User.query.filter_by(username=username_new.data).first()
+        user = User.query.filter(func.lower(User.username) == func.lower(username_new.data)).first()
         if user is not None:
             raise ValidationError("Username already exists. Please choose a different one.")
     
     def validate_email_address_new(self, email_address_new):
-        user = User.query.filter_by(email_address=email_address_new.data).first()
+        user = User.query.filter(func.lower(User.email_address) == func.lower(email_address_new.data)).first()
         if user is not None:
             raise ValidationError("Email address is taken. Please choose a different one.")
         if "@" not in email_address_new.data:
@@ -32,7 +33,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
+        user = User.query.filter(func.lower(User.username) == func.lower(username.data)).first()
         if user is None:
             raise ValidationError("Username not found. Please try again.")
     
