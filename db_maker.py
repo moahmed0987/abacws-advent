@@ -48,6 +48,9 @@ puzzles.append(Puzzle(puzzle=
 puzzles.append(Puzzle(puzzle=
                       """Write a Python program that evaluates arithmetic expressions with +, -, /, *, and parentheses according to the rules of operator precedence, where / and * have the same precedence and + and - have the same precedence. \nInput: a list of arithmetic expressions. \nOutput: the sum of the results of evaluating each expression rounding to 2 decimal places. \nFor example, if the input is ['3 * ( 2 + 6 ) / 52 - 9 - 64 / 7 / 9'], the output should be 23.00.""",
                               type="coding", date=date.today() + timedelta(days=10), answer="answer"))
+puzzles.append(Puzzle(puzzle=
+                      """Write a Python function that takes in a list of words and returns the longest compound word in the list, where a compound word is defined as a word made up of two other words from the list""",
+                              type="coding", date=date.today() + timedelta(days=11), answer="answer"))
 
 
 attempts = []
