@@ -2,7 +2,7 @@ from datetime import date, datetime, timedelta
 
 from flask import abort, flash, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_required, login_user, logout_user
-from itsdangerous import URLSafeSerializer
+from itsdangerous import BadSignature, URLSafeSerializer
 
 from advent_of_code import app, db, login_manager
 from advent_of_code.forms import LoginForm, PuzzleForm, RegistrationForm
@@ -115,10 +115,22 @@ def puzzle(puzzle_date, encoded_input=None):
     elif puzzle.type == "coding":
         if encoded_input is None:
             exec(f"from advent_of_code.static.coding_lib import q{puzzle.id}; global exec_puzzle_input; exec_puzzle_input = str(q{puzzle.id}.create_input());")
-            puzzle_input_serialized = URLSafeSerializer("sec").dumps(exec_puzzle_input)
+            puzzle_input_serialized = URLSafeSerializer("sec").dumps(f"{puzzle.id}:{exec_puzzle_input}")
             return redirect(url_for("puzzle", puzzle_date=puzzle_date, encoded_input=puzzle_input_serialized))
         else:
-            puzzle_input = URLSafeSerializer("sec").loads(encoded_input)
+            try:
+                puzzle_input = URLSafeSerializer("sec").loads(encoded_input)
+                puzzle_id, puzzle_input = puzzle_input.split(":", 1)
+                if int(puzzle_id) != puzzle.id:
+                    flash("There was an error with your input (likely a bad URL). A new input has been generated.", "error")
+                    exec(f"from advent_of_code.static.coding_lib import q{puzzle.id}; global exec_puzzle_input; exec_puzzle_input = str(q{puzzle.id}.create_input());")
+                    puzzle_input_serialized = URLSafeSerializer("sec").dumps(f"{puzzle.id}:{exec_puzzle_input}")
+                    return redirect(url_for("puzzle", puzzle_date=puzzle_date, encoded_input=puzzle_input_serialized))
+            except BadSignature:
+                flash("There was an error with your input (likely a bad URL). A new input has been generated.", "error")
+                exec(f"from advent_of_code.static.coding_lib import q{puzzle.id}; global exec_puzzle_input; exec_puzzle_input = str(q{puzzle.id}.create_input());")
+                puzzle_input_serialized = URLSafeSerializer("sec").dumps(f"{puzzle.id}:{exec_puzzle_input}")
+                return redirect(url_for("puzzle", puzzle_date=puzzle_date, encoded_input=puzzle_input_serialized))
             exec(f"from advent_of_code.static.coding_lib import q{puzzle.id}; global exec_puzzle_answer; exec_puzzle_answer = str(q{puzzle.id}.answer(puzzle_input))")
             print("exec_puzzle_answer =", exec_puzzle_answer)
             # form for submitting code
