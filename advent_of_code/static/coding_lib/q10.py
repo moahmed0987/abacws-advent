@@ -1,4 +1,8 @@
 def answer(password_list):
+    password_list = str(password_list)
+    from ast import literal_eval
+    password_list = literal_eval(password_list)
+
     valid_passwords = 0
     for password in password_list:
         if len(password) < 16 or len(password) > 32:
@@ -18,7 +22,7 @@ def create_input():
     import random
 
     password_list = []
-    for i in range(100000):
+    for i in range(100):
         password = ""
         length = random.randint(1, 48)
         while len(password) < length:
