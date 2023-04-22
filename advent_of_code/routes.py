@@ -23,6 +23,7 @@ def register():
         user = User(username=form.username_new.data, email_address=form.email_address_new.data, password=form.password_new.data)
         db.session.add(user)
         db.session.commit()
+        login_user(user)
         return redirect(url_for("home"))
 
     for field, errors in form.errors.items():
