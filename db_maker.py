@@ -51,6 +51,9 @@ puzzles.append(Puzzle(puzzle=
 puzzles.append(Puzzle(puzzle=
                       """Write a Python function that takes in a list of words and returns the longest compound word in the list, where a compound word is defined as a word made up of two other words from the list""",
                               type="coding", date=date.today() + timedelta(days=11), answer="answer"))
+puzzles.append(Puzzle(puzzle=
+                      """Write a Python function that takes a list of strings as input and returns the sum of the priority of the most common letter in each string. The priorities of the letters are determined by their position in the alphabet, with lowercase letters having priorities 1 through 26 and uppercase letters having priorities 27 through 52. For example, given the input ["ajdafasa", "amdmgmrmmf", "fjSotSwmSgd"], the function should return the sum of (1 * 4) + (13 * 5) + (45 * 3) = 4 + 65 + 135 = 204.""",
+                              type="coding", date=date.today() + timedelta(days=12), answer="answer"))
 
 
 attempts = []
