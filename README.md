@@ -2,7 +2,7 @@
 
 cd into an empty folder
 
-```bash
+```shell
   git clone https://git.cardiff.ac.uk/c21063961/advent-of-code/
 
   cd advent-of-code
