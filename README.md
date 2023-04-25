@@ -10,9 +10,9 @@ cd into an empty folder
   py -m venv venv
 
   Windows:
-  venv\Scripts\activate
+  venv\\Scripts\\activate
   MacOS:
-  source venv\bin\activate
+  source venv\\bin\\activate
 
   pip install -r requirements.txt
 
