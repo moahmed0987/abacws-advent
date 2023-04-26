@@ -10,6 +10,7 @@
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/base_style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script src="{{url_for('static', filename='js/nav-script.js')}}" defer></script>
+    <script src="{{url_for('static', filename='js/flash.js')}}"></script>
     {% block head %}
     {% endblock %}
 
@@ -65,9 +66,16 @@
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert-message {{ category }}">
+                    <div class="alert-message {{ category }}" id="{{ loop.index }}">
                         {{ message }}
+                        <a class="alert-hide-link" onclick="hideFlash({{ loop.index }})">X</a>
                     </div>
+                    <script>
+                        
+                    </script>
+                    <script>
+                        
+                    </script>
                 {% endfor %}
             {% endif %}
         {% endwith %}
