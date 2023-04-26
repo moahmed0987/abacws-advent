@@ -1,0 +1,34 @@
+html {
+	height: 100%;
+	background-image: linear-gradient(to top right, #a35559 , #ccd3db);
+}
+
+.title {
+	text-align: center;
+	font-size: 1.75vw;
+}
+
+.form_container {
+	display: flex;
+	justify-content: center;
+	grid-template-columns: repeat(auto-fill,200px);
+	gap:10px;
+	/*margin-left: auto;
+	margin-right: auto;*/
+}
+
+.form_wrapper {
+	border-radius: 20px;
+	background-color: white;
+	justify-content: center;
+	padding:15px;
+}
+
+.input_wrapper {
+	font-size: 1vw;
+	text-align: left;
+}
+
+.submit {
+	text-align: center;
+}
