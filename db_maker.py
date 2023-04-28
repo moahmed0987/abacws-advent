@@ -54,6 +54,9 @@ puzzles.append(Puzzle(puzzle=
 puzzles.append(Puzzle(puzzle=
                       """Write a Python function that takes a list of strings as input and returns the sum of the priority of the most common letter in each string. The priorities of the letters are determined by their position in the alphabet, with lowercase letters having priorities 1 through 26 and uppercase letters having priorities 27 through 52. For example, given the input ["ajdafasa", "amdmgmrmmf", "fjSotSwmSgd"], the function should return the sum of (1 * 4) + (13 * 5) + (45 * 3) = 4 + 65 + 135 = 204.""",
                               type="coding", date=date.today() + timedelta(days=12), answer="answer"))
+puzzles.append(Puzzle(puzzle=
+                      """Determine the bank notes and coins needed to make up a given amount of money using the denominations of £50, £20, £10, £5, £2, £1, 50p, 20p, 10p, 5p, 2p, and 1p. As an example, if the input amount is 133.48, the corresponding output should be [2, 1, 1, 0, 1, 1, 0, 2, 0, 1, 1, 1], which represents the number of each denomination required to form the given amount.""",
+                              type="coding", date=date.today() + timedelta(days=13), answer="answer"))
 
 
 attempts = []
