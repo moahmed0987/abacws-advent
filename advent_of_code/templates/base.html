@@ -68,7 +68,7 @@
                 {% for category, message in messages %}
                     <div class="alert-message {{ category }}" id="{{ loop.index }}">
                         {{ message }}
-                        <a class="alert-hide-link" onclick="hideFlash({{ loop.index }})">X</a>
+                        <a class="alert-hide-link" onclick="hideFlash('{{ loop.index }}')">X</a>
                     </div>
                     <script>
                         
