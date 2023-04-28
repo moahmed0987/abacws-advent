@@ -1,12 +1,11 @@
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 * {
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
 }
 
-.base-nav{
+.base-nav {
     display: flex;
     justify-content: space-between;
 }
@@ -33,7 +32,6 @@
 
 .hamburger-icon {
     display: none;
-
 }
 
 .btn {
@@ -47,7 +45,7 @@
 
 .logo {
     height: 100px;
-    padding: 0px;
+    padding: 10px;
 }
 
 .title {
@@ -58,7 +56,7 @@
     text-align: center;
 }
 
-.input_wrapper{
+.input_wrapper {
     padding: 10px;
 }
 
@@ -100,10 +98,10 @@ footer {
     color: #0f6a0f;
 }
 
-@media screen and (min-width: 601px){
-    .profile-button{
+@media screen and (min-width: 601px) {
+    .profile-button {
         position: absolute;
-        right:0;
+        right: 0;
     }
 }
 
