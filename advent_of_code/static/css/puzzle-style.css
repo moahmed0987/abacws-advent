@@ -11,3 +11,7 @@
 .hint_container {
     text-align: center;
 }
+
+#hint {
+    margin: 0;
+}
