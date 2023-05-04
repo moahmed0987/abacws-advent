@@ -25,6 +25,7 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    width: 100%;
     overflow: hidden;
     align-items: center;
     transition: transform 1s ease-out;
@@ -154,14 +155,11 @@ footer {
     color: #54c787;
 }
 
-/* small screens nav bar */
-@media screen and (min-width: 601px) {
-    .profile-button {
-        position: absolute;
-        right: 0;
-    }
+.profile-button {
+    margin-left: auto;
 }
 
+/* small screens nav bar */
 @media screen and (max-width: 600px) {
     .nav-bar .base-nav-item:not(:first-child) {
         /* display: none; */

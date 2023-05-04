@@ -34,8 +34,11 @@
                     <li class="base-nav-item">
                         <a id="logout" href="{{ url_for('logout') }}" class="btn nav-item-link">Logout</a>
                     </li>
+                    <li class="base-nav-item">
+                        <a id="leaderboard" href="{{ url_for('leaderboard') }}" class="btn nav-item-link">Leaderboard</a>
+                    </li>
                     <li class="base-nav-item profile-button">
-                        <a id="Profile" href="{{ url_for('profile', username=current_user.username) }}" class="btn nav-item-link">Profile</a>
+                        <a id="profile" href="{{ url_for('profile', username=current_user.username) }}" class="btn nav-item-link">Profile</a>
                     </li>
                 {% else %}
                     <li class="base-nav-item">
@@ -44,11 +47,12 @@
                     <li class="base-nav-item">
                         <a id="register" href="{{ url_for('register') }}" class="btn nav-item-link">Register</a>
                     </li>
+                    <li class="base-nav-item">
+                        <a id="leaderboard" href="{{ url_for('leaderboard') }}" class="btn nav-item-link">Leaderboard</a>
+                    </li>
                 {% endif %}
 
-                <li class="base-nav-item">
-                    <a id="leaderboard" href="{{ url_for('leaderboard') }}" class="btn nav-item-link">Leaderboard</a>
-                </li>
+                
             </ul>
             <li class="hamburger-icon">
                 <a href="javascript:void(0);" class="icon btn nav-item-link" onclick="nav_bar_responsive()">
