@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
 * {
     font-family: 'Courier New', Courier, monospace;
     font-family: 'Open Sans', sans-serif;
@@ -16,6 +17,7 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: #2C3E50;
+    padding: 0px 10px;
 }
 
 .nav-bar {
@@ -44,12 +46,46 @@ body {
     display: none;
 }
 
-.btn {
-    padding: 14px 16px;
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    outline: none;
+    border: 5px solid #2C3E50;
+    background-color: #2C3E50;
+    color: #FFFFFF;
+    font-size: 16px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.btn:hover {
-    background-color: #aaa;
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border: #3498DB 5px solid;
+    outline: none;
+}
+
+input[type="submit"] {
+    padding: 10px;
+    background-color: #2C3E50;
+    border: 0;
+    color: #FFFFFF;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 12px 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+    background-color: #3498DB;
+    transition: background-color 250ms linear;
+}
+
+.btn.nav-item-link {
+    padding:15px;
+}
+
+.btn.nav-item-link:hover {
+    background-color: #8CAABF;
     transition: background-color 250ms linear;
 }
 
@@ -80,6 +116,7 @@ footer {
     padding: 10px;
 }
 
+/* flashes */
 .alert-message.fade-out {
     opacity: 0;
 }
@@ -109,6 +146,7 @@ footer {
     color: #54c787;
 }
 
+/* small screens nav bar */
 @media screen and (min-width: 601px) {
     .profile-button {
         position: absolute;
@@ -121,15 +159,18 @@ footer {
         /* display: none; */
         visibility: hidden;
     }
+
     .hamburger-icon {
         float: right;
         display: block;
     }
+
     .nav-bar.responsive {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
+
     .nav-bar.responsive .base-nav-item {
         visibility: visible;
     }
