@@ -2,7 +2,6 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
 * {
-    font-family: 'Courier New', Courier, monospace;
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
 }
@@ -63,7 +62,8 @@ input[type="password"]:focus {
     outline: none;
 }
 
-input[type="submit"] {
+input[type="submit"],
+button {
     padding: 10px;
     background-color: #2C3E50;
     border: 0;
@@ -75,13 +75,21 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover,
-input[type="submit"]:focus {
+input[type="submit"]:focus,
+button:hover,
+button:focus {
     background-color: #3498DB;
     transition: background-color 250ms linear;
 }
 
+input[type="checkbox"] {
+    /* margin: 10px; */
+    width: 20px;
+    height: 20px;
+}
+
 .btn.nav-item-link {
-    padding:15px;
+    padding: 15px;
 }
 
 .btn.nav-item-link:hover {
