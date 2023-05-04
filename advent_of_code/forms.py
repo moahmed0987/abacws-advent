@@ -7,8 +7,8 @@ from sqlalchemy import func
 class RegistrationForm(FlaskForm):
     username_new = StringField("Username", validators=[DataRequired(), Length(5, 20, message="Username must be between 5 and 20 characters long. Try again.")])
     email_address_new = StringField("Email Address", validators=[DataRequired()])
-    password_new = PasswordField("Password", validators=[DataRequired(), Length(8, 32, message="Password must be between 8 and 32 characters long. Try again."), EqualTo("password_confirm", message="Passwords do not match. Try again.")])
-    password_confirm = PasswordField("Confirm Password", validators=[DataRequired(), Length(5, 20, message="Password must be between 5 and 20 characters long. Try again.")])
+    password_new = PasswordField("Password", validators=[DataRequired(), Length(8, 128, message="Password must be between 8 and 32 characters long. Try again."), EqualTo("password_confirm", message="Passwords do not match. Try again.")])
+    password_confirm = PasswordField("Confirm Password", validators=[DataRequired(), Length(8, 128, message="Password must be between 5 and 20 characters long. Try again.")])
     submit = SubmitField("Register")
 
     def validate_username_new(self, username_new):
