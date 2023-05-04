@@ -1,17 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 * {
+    font-family: 'Courier New', Courier, monospace;
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
+    background-color: #212F3D;
+    color: #ECF0F1;
 }
 
 .base-nav {
     display: flex;
     justify-content: space-between;
+    background-color: #2C3E50;
 }
 
 .nav-bar {
@@ -32,6 +36,8 @@ body {
 .nav-item-link {
     display: block;
     text-decoration: none;
+    color: #9B59B6;
+    font-size: 1.4rem;
 }
 
 .hamburger-icon {
@@ -83,6 +89,7 @@ footer {
     text-decoration: none;
     color: inherit;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .alert-message {
@@ -93,13 +100,13 @@ footer {
 }
 
 .error {
-    background-color: #ffd5de;
-    color: #970020;
+    background-color: #55090d;
+    color: #ff5076;
 }
 
 .success {
-    background-color: #d5f5e3;
-    color: #0f6a0f;
+    background-color: #0a4a0a;
+    color: #54c787;
 }
 
 @media screen and (min-width: 601px) {
@@ -124,7 +131,6 @@ footer {
         width: 100%;
     }
     .nav-bar.responsive .base-nav-item {
-        /* display: list-item; */
         visibility: visible;
     }
 }
