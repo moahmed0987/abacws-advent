@@ -13,6 +13,32 @@
     {% endfor %}
  </div>
  {% endblock puzzlecontent %}
+ 
+ <div class="hint_container">
+     {% if puzzle.hint %}
+     <div class="input_wrapper">
+         <button type="button" id="hint_button">Hint</button>
+         {% if puzzle.hint.startswith('http') %}
+         <script>
+             hint_button.onclick = function () {
+                    var hint = document.getElementById("hint");
+                    hint.innerHTML = "<a href={{ puzzle.hint }}>{{ puzzle.hint }}</a>";
+                    
+                }
+            </script>
+        {% else %}
+            <script>
+                hint_button.onclick = function () {
+                    var hint = document.getElementById("hint");
+                    hint.innerHTML = "{{ puzzle.hint }}";
+                    
+                }    
+            </script>
+        {% endif %}
+    </div>
+    <p id="hint"></p>
+</div>
+{% endif %}
 
 <div class="form_container">
     <div class="form_wrapper">
@@ -21,30 +47,6 @@
 
             {% if puzzle.image %}
                 <img src="{{ url_for('static', filename='img/' + puzzle.image) }}" alt="puzzle image">
-            {% endif %}
-
-            {% if puzzle.hint %}
-                <div class="input_wrapper">
-                    <button type="button" id="hint_button">Hint</button>
-                    {% if puzzle.hint.startswith('http') %}
-                        <script>
-                            hint_button.onclick = function () {
-                                var hint = document.getElementById("hint");
-                                hint.innerHTML = "<a href={{ puzzle.hint }}>{{ puzzle.hint }}</a>";
-                                
-                            }
-                        </script>
-                    {% else %}
-                        <script>
-                            hint_button.onclick = function () {
-                                var hint = document.getElementById("hint");
-                                hint.innerHTML = "{{ puzzle.hint }}";
-                                
-                            }    
-                        </script>
-                    {% endif %}
-                </div>
-                <p id="hint"></p>
             {% endif %}
 
             <div class="input_wrapper">
