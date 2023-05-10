@@ -5,7 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ title }} | Advent of Code</title>
+    {% if title %}
+        <title>{{ title }} | Advent of Code</title>
+    {% else %}
+        <title>Advent of Code</title>
+    {% endif %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/base_style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -60,10 +64,12 @@
                 </a>
             </li>
         </nav>
-
+        
+        {% if title %}
         <div class="title">
             <h1>{{ title }}</h1>
         </div>
+        {% endif %}
     </header>
 
     <div class="alert">

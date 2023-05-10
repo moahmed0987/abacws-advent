@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/index-style2.css') }}">
+{% endblock head %}
+
+{% block content %}
+    <div class="welcome">
+        {% if current_user.is_authenticated %}
+            <h1>Welcome, {{ current_user.username }}!</h1>
+        {% else %}
+            <h1>Welcome to Advent of Code!</h1>
+        {% endif %}
+        <a href="url_for('puzzle', puzzle_date='today')" class="btn nav-item-link" style="width: fit-content;">Today's Puzzle</a>
+    </div>
+    <div class="todays_puzzle">
+    </div>
+
+{% endblock content %}
