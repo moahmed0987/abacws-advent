@@ -80,6 +80,10 @@ def puzzle(puzzle_date, encoded_input=None):
         # return "404 - Invalid date", 404
         return render_template("puzzle_not_found.html", title="Puzzle Not Found")
 
+    if puzzle_date.date() > date.today():
+        # return "404 - Puzzle not found", 404
+        return render_template("puzzle_not_found.html", title="Puzzle Not Found")
+
     # get puzzle for puzzle_date
     puzzle = Puzzle.query.filter_by(date=puzzle_date).first()
     if puzzle is None:
