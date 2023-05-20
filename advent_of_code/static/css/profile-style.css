@@ -6,3 +6,13 @@
     width: 75%;
     margin: auto;
 }
+
+.puzzle a {
+    color: #ECF0F1;
+    text-decoration: none;
+    transition: ease .5s;
+}
+
+.puzzle a:hover {
+    color: #60A5FF;
+}
